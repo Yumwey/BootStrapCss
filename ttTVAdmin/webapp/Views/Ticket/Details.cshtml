@@ -1,0 +1,98 @@
+﻿@model ttTVMS.Models.HotTickt
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HotTickt</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Ticket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Ticket)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Tel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Tel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Budget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Budget)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Finish)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Finish)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_File)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_File)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_detile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_detile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Com)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Com)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Hot_id }) |
+    @Html.ActionLink("Back to List", "GetAllTickets")
+</p>

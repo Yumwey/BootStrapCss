@@ -1,0 +1,282 @@
+﻿<div id="content">
+    <!-- row -->
+    <div class="row">
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-file-text-o"></i>
+                Task Management
+                <span>
+                    >
+                    Assigned Tasks
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+        <!-- right side of the page with the sparkline graphs -->
+        <!-- col -->
+        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+            <!-- sparks -->
+            <ul id="sparks">
+                <li class="sparks-info">
+                    <h5> Call Log Avg<span class="txt-color-blue"> 11.5 min.</span></h5>
+                    <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+                        1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+                    </div>
+                </li>
+                <li class="sparks-info">
+                    <h5> Assigning Avg <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp; 203 min</span></h5>
+                    <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                        110,150,300,130,400,240,220,310,220,300, 270, 210
+                    </div>
+                </li>
+                <li class="sparks-info">
+                    <h5> Resolving Avg <span class="txt-color-greenDark"><i class="fa fa-arrow-circle-down"></i>&nbsp; 8.8 days</span></h5>
+                    <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                        110,150,300,130,400,240,220,310,220,300, 270, 210
+                    </div>
+                </li>
+            </ul>
+            <!-- end sparks -->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row -->
+    <!--
+        The ID "widget-grid" will start to initialize all widgets below
+        You do not need to use widgets if you dont want to. Simply remove
+        the <section></section> and you can use wells or panels instead
+        -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                @*<div class="alert alert-info">
+                        <strong>NOTE:</strong> All the data is loaded from a seperate JSON file
+                    </div>*@
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>Assigned Tasks </h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                            <input class="form-control" type="text">
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <table id="tickets" class="display projects-table table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th style="width:5%"></th>
+                                        <th class="hasinput" style="width:5%">
+                                            <input type="text" class="form-control" placeholder="Filter ID" />
+                                        </th>
+                                        <th class="hasinput" style="width:10%">
+                                            <input type="text" class="form-control" placeholder="Filter Type" />
+                                        </th>
+                                        <th class="hasinput" style="width:20%">
+                                            <input type="text" class="form-control" placeholder="Filter Task" />
+                                        </th>
+                                        <th class="hasinput" style="width:10%">
+                                            @*<input type="text" class="form-control" placeholder="Filter Assigned" />*@
+                                            <input type="text" class="form-control" placeholder="Filter PIC" />
+                                        </th>
+                                        <th class="hasinput" style="width:5%">
+                                            <input type="text" class="form-control" placeholder="Filter Status" />
+                                        </th>
+                                        <th class="hasinput" style="width:10%">
+                                            <input type="text" class="form-control" placeholder="Filter Category" />
+                                        </th>
+                                        <th class="hasinput" style="width:5%">
+                                            <input type="text" class="form-control" placeholder="Filter Priority" />
+                                        </th>
+                                        <th class="hasinput" style="width:5%">
+                                            <input type="text" class="form-control" placeholder="Filter Progress" />
+                                        </th>
+                                        <th class="hasinput icon-addon addon-md">
+                                            <input id="createddateselect_filter" type="text" placeholder="Filter Created" class="form-control datepicker" data-dateformat="yy-mm-dd" />
+                                            <label for="createddateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Created"></label>
+                                        </th>
+                                        <th class="hasinput" style="width:9%">
+                                            <input type="text" class="form-control" placeholder="Filter Owner" />
+                                        </th>
+                                        <th class="hasinput icon-addon addon-md">
+                                            <input id="updateddateselect_filter" type="text" placeholder="Filter Updated" class="form-control datepicker" data-dateformat="yyyy-mm-dd" />
+                                            <label for="updateddateselect_filter" class="glyphicon glyphicon-calendar no-margin padding-top-15" rel="tooltip" title="" data-original-title="Filter Updated"></label>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th data-hide="phone,tablet">ID</th>
+                                        <th data-hide="phone">Type</th>
+                                        <th data-class="expand">Task</th>
+                                        @*<th data-hide="phone"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Assigned</th>*@
+                                        <th data-hide="phone"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> PIC</th>
+                                        <th data-hide="phone">Status</th>
+                                        <th data-hide="phone">Category</th>
+                                        <th>Priority</th>
+                                        <th data-hide="phone,tablet">Progress</th>
+                                        <th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Created</th>
+                                        <th data-hide="phone,tablet"><i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i> Owner</th>
+                                        <th data-hide="phone,tablet"><i class="fa fa-fw fa-calendar text-muted hidden-md hidden-sm hidden-xs"></i> Updated</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+        <!-- row -->
+        <div class="row">
+            <!-- a blank row to get started -->
+            <div class="col-sm-12">
+                <!-- your contents here -->
+            </div>
+        </div>
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+    <!-- Modal -->
+    <div class="modal fade" id="updateFieldModal" tabindex="-1" role="dialog" aria-labelledby="updateFieldModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="updateFieldModalLabel">Article Post</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input id="modalTextInput" type="text" class="form-control" placeholder="Title" required />
+                            </div>
+                            <div class="form-group">
+                                <textarea id="modalCommentInput" class="form-control" placeholder="Comments (Optional)" rows="5" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="submitChange">
+                        Update
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>
+@section pagespecific {
+
+    <script src="/scripts/plugin/dropzone/dropzone.min.js"></script>
+    <script src="/scripts/plugin/superbox/superbox.min.js"></script>
+
+    <script type="text/javascript">
+        var currentUser = '@User.Identity.Name';
+
+        $(document).ready(function () {
+
+            // clears the variable if left blank
+            var responsiveHelper_tickets = undefined;
+            var table = $('#tickets').DataTable({
+                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'l C T>r>" +
+                    "t" +
+                    "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
+                "oTableTools": {
+                    "aButtons": [
+                    "copy",
+                    "csv",
+                    "xls",
+                       {
+                           "sExtends": "pdf",
+                           "sTitle": "ttTVAdmin_PDF",
+                           "sPdfMessage": "ttTVAdmin PDF Export",
+                           "sPdfSize": "letter"
+                       },
+                       {
+                           "sExtends": "print",
+                           "sMessage": "Generated by ttTVAdmin <i>(press Esc to close)</i>"
+                       }
+                    ],
+                    "sSwfPath": "/Scripts/plugin/datatables/swf/copy_csv_xls_pdf.swf"
+                },
+                "autoWidth": true,
+                "ajax": "/Ticket/GetAssigned",
+                "bDestroy": true,
+                "iDisplayLength": 10,
+                "columns": [
+                    {
+                        "class": 'details-control',
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": ''
+                    },
+                    { "data": "TicketId" },
+                    { "data": "Type" },
+                    { "data": "Title" },
+                    { "data": "AssignedTo" },
+                    { "data": "CurrentStatusDisplay" },
+                    { "data": "Category" },
+                    { "data": "Priority" },
+                    { "data": "ProgressDisplay" },
+                    { "data": "CreatedDateDisplay" },
+                    { "data": "Owner" },
+                    { "data": "LastUpdateDateDisplay" }
+                ],
+                "order": [[1, 'asc']],
+                "preDrawCallback": function () {
+                    // Initialize the responsive datatables helper once.
+                    if (!responsiveHelper_tickets) {
+                        responsiveHelper_tickets = new ResponsiveDatatablesHelper($('#tickets'), breakpointDefinition);
+                    }
+                },
+                "rowCallback": function (nRow) {
+                    responsiveHelper_tickets.createExpandIcon(nRow);
+                },
+                "drawCallback": function (oSettings) {
+                    responsiveHelper_tickets.respond();
+                },
+                "fnDrawCallback": function (oSettings) {
+                    runAllCharts();
+                }
+            });
+
+            Ticket.handleTableEvents('tickets', table, '@Url.Action("AttachmentUpload", "Ticket")');
+
+        });
+
+    </script>
+}

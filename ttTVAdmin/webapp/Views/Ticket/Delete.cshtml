@@ -1,0 +1,104 @@
+﻿@model ttTVMS.Models.HotTickt
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>HotTickt</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Ticket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Ticket)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Tel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Tel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Budget)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Budget)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Finish)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Finish)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_File)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_File)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_detile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_detile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hot_Com)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hot_Com)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "GetAllTickets")
+        </div>
+    }
+</div>

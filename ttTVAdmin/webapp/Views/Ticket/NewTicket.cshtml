@@ -1,0 +1,373 @@
+﻿@model ttTVAdmin.Models.TicketCreationModel
+
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="fa fa-edit fa-fw "></i>
+                Tasks
+                <span>
+                    >
+                    New Task
+                </span>
+            </h1>
+        </div>
+        @*<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+                <ul id="sparks" class="">
+                    <li class="sparks-info">
+                        <h5> My Income <span class="txt-color-blue">$47,171</span></h5>
+                        <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+                            1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+                        </div>
+                    </li>
+                    <li class="sparks-info">
+                        <h5> Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;45%</span></h5>
+                        <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                            110,150,300,130,400,240,220,310,220,300, 270, 210
+                        </div>
+                    </li>
+                    <li class="sparks-info">
+                        <h5> Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+                        <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                            110,150,300,130,400,240,220,310,220,300, 270, 210
+                        </div>
+                    </li>
+                </ul>
+            </div>*@
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+                    <!-- widget options:
+                        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                        data-widget-colorbutton="false"
+                        data-widget-editbutton="false"
+                        data-widget-togglebutton="false"
+                        data-widget-deletebutton="false"
+                        data-widget-fullscreenbutton="false"
+                        data-widget-custombutton="false"
+                        data-widget-collapsed="true"
+                        data-widget-sortable="false"
+
+                        -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>New Task</h2>
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body">
+                            <form action="@Url.Action("newticket", "ticket")" method="POST" id="smart-form-ticket" class="smart-form client-form">
+                                <header>
+                                    Task Details
+                                </header>
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationBootstrap()
+                                <fieldset>
+                                    <section>
+                                        <label class="label">Title</label>
+                                        <label class="input">
+                                            <input type="text" name="title" placeholder="Title" id="title" value="@Model.Title">
+                                            @*<b class="tooltip tooltip-bottom-right">Used to display the profile name on the website</b>*@
+                                        </label>
+                                    </section>
+                                    @*</fieldset>
+                                        <fieldset>*@
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            <label class="label">Type</label>
+                                            <label class="select">
+                                                @Html.DropDownListFor(model => model.Type, (SelectList)ViewBag.TicketTypesList)
+                                                <i></i>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">Category</label>
+                                            <label class="select">
+                                                @Html.DropDownListFor(model => model.Category, (SelectList)ViewBag.CategoriesList)
+                                                <i></i>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">Priority</label>
+                                            <label class="select">
+                                                @Html.DropDownListFor(model => model.Priority, (SelectList)ViewBag.PrioritiesList)
+                                                <i></i>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">Customers</label>
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="AffectsCustomer">
+                                                <i></i>Has impact on customer(s)
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <section>
+                                        <label class="label">Details</label>
+                                        <label class="textarea textarea-resizable">
+                                            <textarea rows="5" class="custom-scroll" name="Details"></textarea>
+                                        </label>
+                                    </section>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="checkbox">
+                                                <input type="checkbox" name="OtherOwner" id="otherOwner">
+                                                <i></i>Create on behalf of another user
+                                            </label>
+                                        </section>
+                                        <section class="col col-8" id="ownerSection">
+                                            <label class="select">
+                                                @Html.DropDownListFor(model => model.Owner, (SelectList)ViewBag.OwnerList)
+                                                <i></i>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <section>
+                                        <label class="label">Tags (seperate tags with a comma)</label>
+                                        <label class="input">
+                                            <input type="text" name="TagList" placeholder="Tags" id="TagList" value="@Model.TagList">
+                                        </label>
+                                    </section>
+                                    @*<div class="row">
+                                            <section class="col col-6">
+                                                <label class="select">
+                                                    <select name="gender">
+                                                        <option value="0" selected="selected" disabled="disabled">Gender</option>
+                                                        <option value="1">Male</option>
+                                                        <option value="2">Female</option>
+                                                        <option value="3">Prefer not to answer</option>
+                                                    </select> <i></i>
+                                                </label>
+                                            </section>
+                                            <section class="col col-6">
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-calendar"></i>
+                                                    <input type="text" name="birthdate" placeholder="Birthdate" class="datepicker" data-dateformat='dd/mm/yy'>
+                                                </label>
+                                            </section>
+                                        </div>*@
+                                </fieldset>
+                                <div class="message">
+                                    <i class="fa fa-check"></i>
+                                    <p>
+                                        Thank you for your ticket!
+                                    </p>
+                                </div>
+                            </form>
+                            <h3>Attachments</h3>
+                            <form class="dropzone" id="ticketDropzone" enctype="multipart/form-data" method="post">
+                                <input type="hidden" name="ticketID" id="ticketID" />
+                            </form>
+                            <form class="smart-form client-form">
+                                <footer>
+                                    <button type="submit" class="btn btn-primary" id="submitTicket">
+                                        Create Ticket
+                                    </button>
+                                </footer>
+                            </form>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+@section pagespecific{
+    <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="/scripts/plugin/dropzone/dropzone.min.js"></script>
+
+    <script type="text/javascript">
+        var ticketId = -1;
+        $('#ownerSection').hide();
+
+        Dropzone.autoDiscover = false;
+        $("#mydropzone").dropzone({
+            //url: "/file/post",
+            addRemoveLinks: true,
+            maxFilesize: 0.5,
+            dictDefaultMessage: '<span class="text-center"><span class="font-lg visible-xs-block visible-sm-block visible-lg-block"><span class="font-lg"><i class="fa fa-caret-right text-danger"></i> Drop files <span class="font-xs">to upload</span></span><span>&nbsp&nbsp<h4 class="display-inline"> (Or Click)</h4></span>',
+            dictResponseError: 'Error uploading file!'
+        });
+
+        $("#otherOwner").click(function () {
+            if ($(this).is(':checked')) {
+                $('#ownerSection').show();
+            } else {
+                $('#ownerSection').hide();
+            }
+        });
+
+        ////callback handler for form submit
+        //$("#smart-form-ticket").submit(function (e) {
+        //    var postData = $(this).serializeArray();
+        //    var formURL = $(this).attr("action");
+        //    $.ajax(     {
+        //        url : formURL,
+        //        type: "POST",
+        //        data : postData,
+        //        success:function(data, textStatus, jqXHR)          {
+        //            $("#smart-form-ticket").addClass('submited');
+        //            alert('success!');
+        //        },
+        //        error: function(jqXHR, textStatus, errorThrown)          {
+        //            alert('fail!');
+        //            //if fails
+        //        }
+        //    });
+        //    e.preventDefault(); //STOP default action
+        //    // e.unbind(); //unbind. to stop multiple form submit.
+        //});
+
+        $("#submitTicket").click(function (e) {
+            $("#smart-form-ticket").submit();
+            e.preventDefault(); //STOP default action
+        });
+
+        $.validator.addMethod("validateOwner", function (value, element) {
+            return $("#otherOwner").is(':checked') == false || $('#Owner').val() != null;
+        }, 'Please select an owner of the ticket');
+
+        // Validation
+        $(function () {
+            // Validation
+            $("#smart-form-ticket").validate({
+                // Rules for form validation
+                rules: {
+                    title: {
+                        required: true
+                    },
+                    Type: {
+                        required: true
+                    },
+                    Category: {
+                        required: true
+                    },
+                    Priority: {
+                        required: true
+                    },
+                    Details: {
+                        required: true
+                    },
+                    OtherOwner: {
+                        "validateOwner": true
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    title: {
+                        required: 'Please provide a Title'
+                    },
+                    Type: {
+                        required: 'Please select a ticket Type'
+                    },
+                    Category: {
+                        required: 'Please select a Category'
+                    },
+                    Priority: {
+                        required: 'Please select a Priority'
+                    },
+                    Details: {
+                        required: 'Please provide details of the ticket'
+                    }
+                },
+
+                // Ajax form submition
+                submitHandler: function (form) {
+                    var submit = $("#submitTicket");
+                    submit.prop('disabled', true);
+                    $(form).ajaxSubmit({
+                        success: function (e) {
+                            var title = "Ticket created.";
+                            var fileCount = ticketDropzone.getAcceptedFiles().length;
+                            if (fileCount > 0)
+                                title += " Uploading " + fileCount + " attachments... (Please do not leave this page.)";
+
+                            $.smallBox({
+                                title: "Ticket Created",
+                                content: "<i class='fa fa-clock-o'></i> <i>" + title + "</i>",
+                                color: "#659265",
+                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                timeout: 10000
+                            });
+                            ticketId = e;
+                            $('#ticketID').val(ticketId);
+                            ticketDropzone.processQueue();
+                            //$("#smart-form-ticket").addClass('submited');
+                        }
+                    });
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+        });
+
+        var ticketDropzone;
+        $('#ticketDropzone').dropzone({
+            url: '@Url.Action("AttachmentUpload", "Ticket")',
+            addRemoveLinks: true,
+            maxFilesize: 0.5,
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            dictDefaultMessage: '<span class="text-center"><span class="font-lg visible-xs-block visible-sm-block visible-lg-block"><span class="font-lg"><i class="fa fa-caret-right text-danger"></i> Drop files <span class="font-xs">to upload</span></span><span>&nbsp&nbsp<h4 class="display-inline"> (Or Click)</h4></span>',
+            dictResponseError: 'Error uploading file!',
+            init: function () {
+                ticketDropzone = this;
+
+                this.on("complete", function (data) {
+                    if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                        var res = eval('(' + data.xhr.responseText + ')');
+                        var msg;
+                        if (res.Result) {
+                            $.smallBox({
+                                title: "Attachment Updated",
+                                content: "<i class='fa fa-clock-o'></i> <i>" + res.Count + " files have been uploaded.</i>",
+                                color: "#659265",
+                                iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                                timeout: 10000
+                            });
+                            Ticket.listFiles(id);
+                        }
+                        else {
+                            $.smallBox({
+                                title: "Error uploading attachment. Click 'Retry Upload' to re-try.",
+                                content: "<i class='fa fa-times'></i> <i>" + res.Message + "</i>",
+                                color: "#C46A69",
+                                iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                                //timeout: 10000
+                            });
+                            var submit = $("#submitTicket");
+                            submit.text('Retry upload');
+                            submit.prop('disabled', false);
+                        }
+                    }
+                });
+
+                //this.on("removedfile", function () {
+                //    if (this.getAcceptedFiles().length === 0) {
+                //        $('#submitUpload' + id).attr("disabled", true);
+                //    }
+                //});
+
+            }
+        });
+    </script>
+}

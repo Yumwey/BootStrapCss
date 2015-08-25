@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ttTVMS.Models.HotTickt>
+@helper Truncate(string input, int length) { 
+    if (input.Length < length)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0,length)<text>...</text>
+    }
+    }
+
+@{
+    ViewBag.Title = "GetAllTickets";
+}
+
+<h2>GetAllTickets</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           票名
+        </th>
+        <th>
+            联系人邮箱
+        </th>
+        <th>
+            电话
+        </th>
+        <th>
+           类型
+        </th>
+        <th>
+           票价
+        </th>
+        <th>
+           开始时间
+        </th>
+        <th>
+           结束时间
+        </th>
+        <th>
+           相关文件
+        </th>
+        <th>
+            详情
+        </th>
+        <th>
+           发行公司
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hot_Ticket)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hot_Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hot_Tel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hot_type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hot_Budget)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hot_Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hot_Finish)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hot_File)
+        </td>
+        <td>
+            @Truncate(item.Hot_detile, 10)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hot_Com)
+        </td>
+        <td>
+            @Html.ActionLink("修改", "EditorTickets", new { id=item.Hot_id }) |
+            @Html.ActionLink("详细", "Details", new { id=item.Hot_id }) |
+            @Html.ActionLink("删除", "Delete", new { id=item.Hot_id })
+        </td>
+    </tr>
+}
+
+</table>

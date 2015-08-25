@@ -1,0 +1,171 @@
+﻿@model ttTVAdmin.Models.TicketViewModel
+
+<div id="content">
+    <!-- row -->
+    <div class="row">
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-file-text-o"></i>
+                Task Management
+                <span>
+                    >
+                    Task Details
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+        <!-- right side of the page with the sparkline graphs -->
+        <!-- col -->
+        @*<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+                <!-- sparks -->
+                <ul id="sparks">
+                    <li class="sparks-info">
+                        <h5> Call Log Avg<span class="txt-color-blue"> 11.5 min.</span></h5>
+                        <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+                            1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+                        </div>
+                    </li>
+                    <li class="sparks-info">
+                        <h5> Assigning Avg <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp; 203 min</span></h5>
+                        <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                            110,150,300,130,400,240,220,310,220,300, 270, 210
+                        </div>
+                    </li>
+                    <li class="sparks-info">
+                        <h5> Resolving Avg <span class="txt-color-greenDark"><i class="fa fa-arrow-circle-down"></i>&nbsp; 8.8 days</span></h5>
+                        <div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+                            110,150,300,130,400,240,220,310,220,300, 270, 210
+                        </div>
+                    </li>
+                </ul>
+                <!-- end sparks -->
+            </div>*@
+        <!-- end col -->
+    </div>
+    <!-- end row -->
+    <!--
+        The ID "widget-grid" will start to initialize all widgets below
+        You do not need to use widgets if you dont want to. Simply remove
+        the <section></section> and you can use wells or panels instead
+        -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                @*<div class="alert alert-info">
+                        <strong>NOTE:</strong> All the data is loaded from a seperate JSON file
+                    </div>*@
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                    -->
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-file-text"></i> </span>
+                        <h2>Task Details</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                            <input class="form-control" type="text">
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body">
+                            <div id="ticketDetails"></div>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+        <!-- row -->
+        <div class="row">
+            <!-- a blank row to get started -->
+            <div class="col-sm-12">
+                <!-- your contents here -->
+            </div>
+        </div>
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+    <!-- Modal -->
+    @Html.Partial("_TicketModals")
+    <!-- /Modal -->
+
+</div>
+@section pagespecific {
+
+    <script src="/scripts/plugin/dropzone/dropzone.min.js"></script>
+    <script src="/scripts/plugin/superbox/superbox.min.js"></script>
+
+    <script type="text/javascript">
+    var currentUser = '@User.Identity.Name';
+    var data = JSON.parse('@Html.Raw(ViewBag.TicketJson)');
+
+        $(document).ready(function () {
+
+            updateTicket(data);
+            Ticket.setupDropZone(data.TicketId, '@Url.Action("AttachmentUpload", "Ticket")');
+
+        });
+
+        function updateTicket(ticket) {
+            $('#ticketDetails').html(Ticket.format(ticket));
+            Ticket.renderWorkflow(ticket);
+            Ticket.listFiles(ticket.TicketId);
+            Ticket.listComments(ticket.TicketId);
+            Ticket.handleFieldChangeEvents(reloadTicket);
+        }
+
+        function reloadTicket() {
+            $.post("/Ticket/Get", { "id": data.TicketId }, function (ticket) {
+                if (ticket != null) {
+                    data = ticket;
+                    updateTicket(data);
+                    Ticket.listComments(data.TicketId);
+                    // input.val('');
+                    //$.smallBox({
+                    //    title: "Ticket updated.",
+                    //    content: "<i class='fa fa-clock-o'></i> <i>Your changes have been saved successfully.</i>",
+                    //    color: "#659265",
+                    //    iconSmall: "fa fa-times fa-2x fadeInRight animated",
+                    //    timeout: 10000
+                    //});
+                } else {
+                    $.smallBox({
+                        title: "Error",
+                        content: "<i class='fa fa-times'></i> <i>Unable to get the latest details of the ticket. Please try to refresh your browser.</i>",
+                        color: "#C46A69",
+                        iconSmall: "fa fa-check fa-2x fadeInRight animated",
+                        // timeout: 10000
+                    });
+                }
+
+                // button.attr('disabled', false);
+            });
+
+        }
+
+    </script>
+}
