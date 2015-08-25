@@ -23,25 +23,25 @@
             </li>
 
             <li class="@Html.RouteIf("NewTicket", "active")">
-                <a href="@Url.Action("NewTicket", "ticket")"><i class="fa fa-lg fa-fw fa-plus"></i> <span class="menu-item-parent">New Task</span><span class="badge pull-right inbox-badge" id="newTicketSpan"></span></a>
+                <a href="@Url.Action("NewTicket", "ticket")"><i class="fa fa-lg fa-fw fa-plus"></i> <span class="menu-item-parent">新的任务</span><span class="badge pull-right inbox-badge" id="newTicketSpan"></span></a>
             </li>
 
             <li class="@Html.RouteIf("UnassignedTickets", "active")">
-                <a href="@Url.Action("UnassignedTickets", "ticket")"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Unassigned Tasks</span><span class="badge pull-right inbox-badge" id="unassignedTicketSpan"></span></a>
+                <a href="@Url.Action("UnassignedTickets", "ticket")"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">待办任务</span><span class="badge pull-right inbox-badge" id="unassignedTicketSpan"></span></a>
             </li>
 
             <li class="@Html.RouteIf("AssignedTickets", "active")">
-                <a href="@Url.Action("AssignedTickets", "ticket")"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Assigned Tasks</span></a>
+                <a href="@Url.Action("AssignedTickets", "ticket")"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">已完成任务</span></a>
             </li>
 
             <li class="@Html.RouteIf("TicketsByStatus", "active")">
-                <a href="@Url.Action("TicketsByStatus", "ticket")"><i class="fa fa-lg fa-fw fa-filter"></i> <span class="menu-item-parent">Tasks By Status</span></a>
+                <a href="@Url.Action("TicketsByStatus", "ticket")"><i class="fa fa-lg fa-fw fa-filter"></i> <span class="menu-item-parent">任务状态</span></a>
             </li>
-            <li class="@Html.RouteIf("GetAllTickets", "active")">
+            @*<li class="@Html.RouteIf("GetAllTickets", "active")">
                 <a href="@Url.Action("GetAllTickets", "ticket")"><i class="fa fa-lg fa-fw fa-filter"></i> <span class="menu-item-parent">Hot Tickets</span></a>
-            </li>
+            </li>*@
             <li class="@Html.RouteIf("archive", "active")">
-                <a href="#"><i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">Archive</span></a>
+                <a href="#"><i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">参考工具</span></a>
                 <ul>
                     <li class="@Html.RouteIf("inbox", "active")">
                         <a href="@Url.Action("inbox", "home")"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Inbox</span><span class="badge pull-right inbox-badge">14</span></a>

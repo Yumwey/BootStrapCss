@@ -12,6 +12,8 @@ using System.Web;
 using System.IO;
 using System.Collections;
 using SelectListItem = System.Web.Mvc.SelectListItem;
+using SmartAdminMvc.IDAL;
+using SmartAdminMvc.DAL;
 
 #endregion
 
@@ -21,8 +23,9 @@ namespace ttTVAdmin.Controllers
     public class TicketController : Controller
     {
         private ServiceDeskContext db = new ServiceDeskContext();
-       
 
+        //调用反射机制的方法 
+        private static InterfaceTicketsRepository ITickets = DALFactory.CreateTickets();
         // GET: /account/register
         public ActionResult NewTicket()
         {
@@ -89,80 +92,86 @@ namespace ttTVAdmin.Controllers
         // POST: /account/register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public int NewTicket(TicketCreationModel viewModel)
+        //public int NewTicket(TicketCreationModel viewModel)
+        //{
+        //    int returnValue = -1;
+        //    Ticket ticket;
+        //    //ticket.TicketId
+        //    // Ensure we have a valid viewModel to work with
+        //    if (ModelState.IsValid)
+        //    {
+        //        DateTime now = DateTime.Now;
+        //        string user = this.User.Identity.Name;
+        //        ticket = new Ticket()
+        //        {
+        //            AffectsCustomer = viewModel.AffectsCustomer,
+        //            Category = viewModel.Category,
+        //            CreatedBy = user,
+        //            CreatedDate = now,
+        //            CurrentStatus = "Active",
+        //            CurrentStatusDate = now,
+        //            CurrentStatusSetBy = user,
+        //            Details = viewModel.Details,
+        //            IsHtml = false,
+        //            LastUpdateBy = user,
+        //            LastUpdateDate = now,
+        //            Priority = viewModel.Priority,
+        //            PublishedToKb = false,
+        //            TagList = viewModel.TagList,
+        //            Title = viewModel.Title,
+        //            Type = viewModel.Type,
+        //            Owner = viewModel.OtherOwner ? viewModel.Owner : user
+        //        };
+        //        db.Tickets.Add(ticket);
+
+        //        db.SaveChanges();
+
+        //        returnValue = ticket.TicketId;
+        //        //return View(viewModel);
+        //    }
+        //    return returnValue;
+        //    //return View(viewModel);
+
+        //    //// Prepare the identity with the provided information
+        //    //var user = new IdentityUser
+        //    //{
+        //    //    UserName = viewModel.Username ?? viewModel.Email,
+        //    //    Email = viewModel.Email
+        //    //};
+
+        //    //// Try to create a user with the given identity
+        //    //try
+        //    //{
+        //    //    var result = await _manager.CreateAsync(user, viewModel.Password);
+
+        //    //    // If the user could not be created
+        //    //    if (!result.Succeeded)
+        //    //    {
+        //    //        // Add all errors to the page so they can be used to display what went wrong
+        //    //        AddErrors(result);
+
+        //    //        return View(viewModel);
+        //    //    }
+
+        //    //    // If the user was able to be created we can sign it in immediately
+        //    //    // Note: Consider using the email verification proces
+        //    //    await SignInAsync(user, false);
+
+        //    //    return RedirectToLocal();
+        //    //}
+        //    //catch (DbEntityValidationException ex)
+        //    //{
+        //    //    // Add all errors to the page so they can be used to display what went wrong
+        //    //    AddErrors(ex);
+
+        //    //    return View(viewModel);
+        //    //}
+        //}
+       
+        public int Create(TicketCreationModel viewmodel)
         {
-            int returnValue = -1;
-            Ticket ticket;
-            //ticket.TicketId
-            // Ensure we have a valid viewModel to work with
-            if (ModelState.IsValid)
-            {
-                DateTime now = DateTime.Now;
-                string user = this.User.Identity.Name;
-                ticket = new Ticket()
-                {
-                    AffectsCustomer = viewModel.AffectsCustomer,
-                    Category = viewModel.Category,
-                    CreatedBy = user,
-                    CreatedDate = now,
-                    CurrentStatus = "Active",
-                    CurrentStatusDate = now,
-                    CurrentStatusSetBy = user,
-                    Details = viewModel.Details,
-                    IsHtml = false,
-                    LastUpdateBy = user,
-                    LastUpdateDate = now,
-                    Priority = viewModel.Priority,
-                    PublishedToKb = false,
-                    TagList = viewModel.TagList,
-                    Title = viewModel.Title,
-                    Type = viewModel.Type,
-                    Owner = viewModel.OtherOwner ? viewModel.Owner : user
-                };
-                db.Tickets.Add(ticket);
-
-                db.SaveChanges();
-
-                returnValue = ticket.TicketId;
-                //return View(viewModel);
-            }
-            return returnValue;
-            //return View(viewModel);
-
-            //// Prepare the identity with the provided information
-            //var user = new IdentityUser
-            //{
-            //    UserName = viewModel.Username ?? viewModel.Email,
-            //    Email = viewModel.Email
-            //};
-
-            //// Try to create a user with the given identity
-            //try
-            //{
-            //    var result = await _manager.CreateAsync(user, viewModel.Password);
-
-            //    // If the user could not be created
-            //    if (!result.Succeeded)
-            //    {
-            //        // Add all errors to the page so they can be used to display what went wrong
-            //        AddErrors(result);
-
-            //        return View(viewModel);
-            //    }
-
-            //    // If the user was able to be created we can sign it in immediately
-            //    // Note: Consider using the email verification proces
-            //    await SignInAsync(user, false);
-
-            //    return RedirectToLocal();
-            //}
-            //catch (DbEntityValidationException ex)
-            //{
-            //    // Add all errors to the page so they can be used to display what went wrong
-            //    AddErrors(ex);
-
-            //    return View(viewModel);
-            //}
+            string Name = this.User.Identity.Name;
+            return ITickets.Create(viewmodel,Name);
         }
 
         public ActionResult TicketDetails(int id)
@@ -451,90 +460,5 @@ namespace ttTVAdmin.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Creat(HotTickt hot)
-        {       
-            //利用model里面的类接受View传来的值,再赋值给对象 
-             //HotTicktModel hotickt作为Creat方法的参数
-            //model类起到了一个存储当前值的容器的作用
-            //if (ModelState.IsValid)
-            //{
-            //    hot = new HotTickt()
-            //    {
-            //        Hot_Ticket = hotmodel.Hot_Ticket,
-            //        Hot_Email = hotmodel.Hot_Email,
-            //        Hot_Tel = hotmodel.Hot_Tel,
-            //        Hot_type = hotmodel.Hot_type,
-            //        Hot_Budget = hotmodel.Hot_Budget,
-            //        Hot_Start = hotmodel.Hot_Start,
-            //        Hot_Finish = hotmodel.Hot_Finish,
-            //        Hot_File = hotmodel.Hot_File,
-            //        Hot_detile = hotmodel.Hot_detile,
-            //        Hot_Com = hotmodel.Hot_Com,
-            //    };
-            //    db.HotTickets.Add(hot);
-            //    db.SaveChanges();
-            //}
-            //直接添加进数据库
-            if (ModelState.IsValid)
-            {
-                db.HotTickets.Add(hot);
-                db.SaveChanges();
-            }
-            return View("GetAllTickets"); 
-        }
-        //添加的票信息的查找方法
-        public ActionResult GetAllTickets()
-        {
-            var HotList = db.HotTickets.ToList();
-            //var HotList=from p in ttdb.HotList select p;
-            return View(HotList);
-        }
-        //显示详情页
-        public ActionResult Details(int id)
-        {
-            var HotTicket = db.HotTickets.Find(id);
-            return View(HotTicket);
-        }
-        //对票信息的修改
-        public ActionResult EditorTickets(int id)
-        {
-            var HotTicket = db.HotTickets.Find(id);
-            return View(HotTicket);
-        }
-        [HttpPost]
-        public ActionResult EditorTickets(HotTickt HotTicket)            
-        {            
-            if (ModelState.IsValid)
-            {
-                //UpdateModel的方法
-                HotTickt tickt = db.HotTickets.Find(HotTicket.Hot_id);
-                UpdateModel<HotTickt>(tickt);                
-                db.SaveChanges();
-                //增删的方法:产生的问题，排序按最近的时间，ID值改变
-                //HotTickt tickt = db.HotTickets.Find(HotTicket.Hot_id);
-                //db.HotTickets.Remove(tickt);
-                //db.HotTickets.Add(HotTicket);
-                //db.SaveChanges();
-            }
-            else
-                return View("EditorTickets");
-            return RedirectToAction("GetAllTickets");
-
-        }
-        public ActionResult Delete(int id)
-        {
-            var HotTickes = db.HotTickets.Find(id);
-            return View(HotTickes);
-        }
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            var HotTicke = db.HotTickets.Find(id);
-            db.HotTickets.Remove(HotTicke);
-            db.SaveChanges();
-            return RedirectToAction("GetAllTickets");
-        }
-
     }
 }

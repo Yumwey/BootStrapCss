@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAdminMvc", "webapp\ttTVAdmin.csproj", "{24CA74F5-6AF8-4C67-AC79-3E648ECBEA68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TT-TV", "webapp\TT-TV.csproj", "{24CA74F5-6AF8-4C67-AC79-3E648ECBEA68}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{866DF294-69FE-4E21-8DE7-EA37694E94A2}"
 	ProjectSection(SolutionItems) = preProject

@@ -24,9 +24,7 @@ namespace ttTVMS.Models
 
         public DbSet<TicketTag> TicketTags { get; set; }
 
-        public DbSet<Setting> Settings { get; set; }
-
-        public DbSet<HotTickt> HotTickets { get; set; }
+        public DbSet<Setting> Settings { get; set; }   
        
     }
 
