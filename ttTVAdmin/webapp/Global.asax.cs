@@ -15,11 +15,11 @@ namespace ttTVAdmin
     {
         protected void Application_Start()
         {
-            ModelBinders.Binders.Add(typeof(DateTime), new ttTVMS.Models.ttTVDateTimeModelBinder());
+            ModelBinders.Binders.Add(typeof(DateTime), new Models.ttTVDateTimeModelBinder());
             
-            System.Data.Entity.Database.SetInitializer<ttTVMS.Models.ServiceDeskContext>(null);
-            System.Data.Entity.Database.SetInitializer<ttTVMS.Models.ttTVContext>(null);
-            System.Data.Entity.Database.SetInitializer<ttTVMS.Models.ttTVLogContext>(null);
+            System.Data.Entity.Database.SetInitializer<Models.ServiceDeskContext>(null);
+            System.Data.Entity.Database.SetInitializer<Models.ttTVContext>(null);
+            System.Data.Entity.Database.SetInitializer<Models.ttTVLogContext>(null);
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             

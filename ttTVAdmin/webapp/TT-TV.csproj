@@ -493,11 +493,6 @@
     <Content Include="Content\sound\voice_off.ogg" />
     <Content Include="Content\sound\voice_on.ogg" />
     <Content Include="Content\data\dataList.json" />
-    <Content Include="Models\DataClasses1.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Properties\PublishProfiles\Admin.tt-tv.cn.pubxml" />
     <None Include="Properties\PublishProfiles\SmartAdmin - Release.pubxml" />
     <None Include="Properties\PublishProfiles\SmartAdmin - Debug.pubxml" />
@@ -1077,35 +1072,28 @@
     <Compile Include="Controllers\IntelController.cs" />
     <Compile Include="Controllers\MiscController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
-    <Compile Include="DAL\ContextFactory.cs" />
-    <Compile Include="DAL\DALFactory.cs" />
-    <Compile Include="DAL\TicketsRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="App_Helpers\DateTimeExtensions.cs" />
-    <Compile Include="IDAL\InterfaceBaseRepository.cs" />
-    <Compile Include="IDAL\InterfaceTicketsRepository.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\DataClasses1.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DateTimeModelBinder.cs" />
-    <Compile Include="Models\ServiceDeskModels.cs" />
-    <Compile Include="Models\ServiceDeskViewModels.cs" />
-    <Compile Include="Models\ttTVModels.cs" />
-    <Compile Include="Models\ttTVViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Models\DataClasses1.dbml.layout">
-      <DependentUpon>DataClasses1.dbml</DependentUpon>
-    </None>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{017c510e-3f9d-4f87-8234-603f5fdda955}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDAL\IDAL.csproj">
+      <Project>{3454fd4e-1758-4451-96d5-e92e97715ae7}</Project>
+      <Name>IDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{034bf835-3f55-4a65-adbe-94ab67758f16}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

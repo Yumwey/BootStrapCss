@@ -1,0 +1,9 @@
+D:\BootStrapCss\ttTVAdmin\IDAL\obj\Debug\IDAL.csprojResolveAssemblyReference.cache
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\IDAL.dll
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\IDAL.pdb
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\Model.dll
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\EntityFramework.dll
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\Model.pdb
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\EntityFramework.xml
+D:\BootStrapCss\ttTVAdmin\IDAL\obj\Debug\IDAL.dll
+D:\BootStrapCss\ttTVAdmin\IDAL\obj\Debug\IDAL.pdb

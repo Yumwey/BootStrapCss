@@ -3,8 +3,8 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.WebPages.Html;
-using ttTVAdmin.Models;
-using ttTVMS.Models;
+using Models;
+using Models;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
@@ -12,8 +12,9 @@ using System.Web;
 using System.IO;
 using System.Collections;
 using SelectListItem = System.Web.Mvc.SelectListItem;
-using SmartAdminMvc.IDAL;
-using SmartAdminMvc.DAL;
+using IDAL;
+using DAL;
+using Models;
 
 #endregion
 
@@ -26,6 +27,8 @@ namespace ttTVAdmin.Controllers
 
         //调用反射机制的方法 
         private static InterfaceTicketsRepository ITickets = DALFactory.CreateTickets();
+        private static InterfaceCommentsRepository IComments = DALFactory.CreateTicketsComments();
+        private static InterfaceTicketsAttachmentsRepository IAttchment = DALFactory.CreateAttachment();
         // GET: /account/register
         public ActionResult NewTicket()
         {
@@ -91,104 +94,28 @@ namespace ttTVAdmin.Controllers
 
         // POST: /account/register
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        //public int NewTicket(TicketCreationModel viewModel)
-        //{
-        //    int returnValue = -1;
-        //    Ticket ticket;
-        //    //ticket.TicketId
-        //    // Ensure we have a valid viewModel to work with
-        //    if (ModelState.IsValid)
-        //    {
-        //        DateTime now = DateTime.Now;
-        //        string user = this.User.Identity.Name;
-        //        ticket = new Ticket()
-        //        {
-        //            AffectsCustomer = viewModel.AffectsCustomer,
-        //            Category = viewModel.Category,
-        //            CreatedBy = user,
-        //            CreatedDate = now,
-        //            CurrentStatus = "Active",
-        //            CurrentStatusDate = now,
-        //            CurrentStatusSetBy = user,
-        //            Details = viewModel.Details,
-        //            IsHtml = false,
-        //            LastUpdateBy = user,
-        //            LastUpdateDate = now,
-        //            Priority = viewModel.Priority,
-        //            PublishedToKb = false,
-        //            TagList = viewModel.TagList,
-        //            Title = viewModel.Title,
-        //            Type = viewModel.Type,
-        //            Owner = viewModel.OtherOwner ? viewModel.Owner : user
-        //        };
-        //        db.Tickets.Add(ticket);
-
-        //        db.SaveChanges();
-
-        //        returnValue = ticket.TicketId;
-        //        //return View(viewModel);
-        //    }
-        //    return returnValue;
-        //    //return View(viewModel);
-
-        //    //// Prepare the identity with the provided information
-        //    //var user = new IdentityUser
-        //    //{
-        //    //    UserName = viewModel.Username ?? viewModel.Email,
-        //    //    Email = viewModel.Email
-        //    //};
-
-        //    //// Try to create a user with the given identity
-        //    //try
-        //    //{
-        //    //    var result = await _manager.CreateAsync(user, viewModel.Password);
-
-        //    //    // If the user could not be created
-        //    //    if (!result.Succeeded)
-        //    //    {
-        //    //        // Add all errors to the page so they can be used to display what went wrong
-        //    //        AddErrors(result);
-
-        //    //        return View(viewModel);
-        //    //    }
-
-        //    //    // If the user was able to be created we can sign it in immediately
-        //    //    // Note: Consider using the email verification proces
-        //    //    await SignInAsync(user, false);
-
-        //    //    return RedirectToLocal();
-        //    //}
-        //    //catch (DbEntityValidationException ex)
-        //    //{
-        //    //    // Add all errors to the page so they can be used to display what went wrong
-        //    //    AddErrors(ex);
-
-        //    //    return View(viewModel);
-        //    //}
-        //}
-       
+        [ValidateAntiForgeryToken]      
         public int Create(TicketCreationModel viewmodel)
-        {
+        {          
             string Name = this.User.Identity.Name;
             return ITickets.Create(viewmodel,Name);
         }
 
-        public ActionResult TicketDetails(int id)
-        {
-            Ticket ticket = db.Tickets.Find(id);
+        //public ActionResult TicketDetails(int id)
+        //{
+        //    Ticket ticket = db.Tickets.Find(id);
 
-            if (ticket == null)
-                return RedirectToAction("Index", "Home");
-            else
-            {
-                TicketViewModel ticketModel = ticket.ToViewModel(true, true, true);
+        //    if (ticket == null)
+        //        return RedirectToAction("Index", "Home");
+        //    else
+        //    {
+        //        TicketViewModel ticketModel = ticket.ToViewModel(true, true, true);
 
-                ViewBag.TicketJson = System.Web.Helpers.Json.Encode(ticketModel);
+        //        ViewBag.TicketJson = System.Web.Helpers.Json.Encode(ticketModel);
 
-                return View(ticketModel);
-            }
-        }
+        //        return View(ticketModel);
+        //    }
+        //}
 
         // GET: home/index
         public ActionResult UnassignedTickets()
@@ -206,76 +133,53 @@ namespace ttTVAdmin.Controllers
             return View();
         }
 
-        public JsonResult Get(int id)
-        {
-            Ticket ticket = db.Tickets.Where(t => t.TicketId.Equals(id)).FirstOrDefault();
+        //public JsonResult Get(int id)
+        //{
+        //    Ticket ticket = db.Tickets.Where(t => t.TicketId.Equals(id)).FirstOrDefault();
 
-            var data = ticket.ToViewModel(true, true, true);
-            //var data = new { data = ticket.ToViewModel(true, true, true) };
-
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //    var data = ticket.ToViewModel(true, true, true);
+        //    //var data = new { data = ticket.ToViewModel(true, true, true) };
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
 
         //[HttpPost]
         public JsonResult GetUnassignedCount()
-        {
-            int count = db.Tickets.Where(t => t.AssignedTo == null).Count();
+      {
+            
+            int count = ITickets.Count();
 
             return Json(count, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetByStatus(string user, string status)
         {
-            IQueryable<Ticket> tickets;
-            if (string.IsNullOrEmpty(user))
-            {
-                if (string.IsNullOrEmpty(status))
-                    tickets = db.Tickets;
-                else
-                    tickets = db.Tickets.Where(t => status.Equals(t.CurrentStatus));
-            }
-            else
-                tickets = db.Tickets.Where(t =>
-                    string.IsNullOrEmpty(t.AssignedTo) == false && t.AssignedTo.Equals(user) &&
-                    (string.IsNullOrEmpty(status) || status.Equals(t.CurrentStatus))
-                    );
-
-            var data = new { data = tickets.ToViewModels(true, true, true) };
-
+            object data = ITickets.GetByStatus(user,status);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetAssigned(string user)
         {
-            IQueryable<Ticket> tickets;
-            if (string.IsNullOrEmpty(user))
-                tickets = db.Tickets.Where(t => string.IsNullOrEmpty(t.AssignedTo) == false && t.CurrentStatus != "Closed");
-            else
-                tickets = db.Tickets.Where(t => string.IsNullOrEmpty(t.AssignedTo) == false && t.AssignedTo.Equals(user) && t.CurrentStatus != "Closed");
-
-            var data = new { data = tickets.ToViewModels(true, true, true) };
-
+            object data = ITickets.GetAssigned(user);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetUnassigned()
-        {
-            var tickets = db.Tickets.Where(t => t.AssignedTo == null);
-            var data = new { data = tickets.ToViewModels(true, true, true) };
+        {         
+            object data = ITickets.GetUnassigned();
 
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-
+        //获取评论
         public JsonResult GetComments(int id)
         {
-            var comments = db.TicketComments.Where(c => c.TicketId == id).OrderByDescending(c => c.CommentId);
+            var comments = IComments.Get(id);
             return Json(comments.ToViewModels(), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetAttachments(int id)
-        {
-            var files = db.TicketAttachments.Where(a => a.TicketId == id).OrderByDescending(c => c.FileId);
-            return Json(files.ToViewModels(), JsonRequestBehavior.AllowGet);
+        {           
+            var flies = IAttchment.Get(id);
+            return Json(flies.ToViewModels(), JsonRequestBehavior.AllowGet);
         }
         //定义的附件的获取和显示方法:图片
         public ActionResult GetAttachment(int id, int? size)

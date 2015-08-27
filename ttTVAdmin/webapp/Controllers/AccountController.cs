@@ -10,7 +10,7 @@ using System.Web.Security;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using ttTVAdmin.Models;
+using Models;
 
 #endregion
 

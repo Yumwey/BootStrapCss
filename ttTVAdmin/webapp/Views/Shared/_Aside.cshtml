@@ -19,7 +19,7 @@
 
         <ul>
             <li class="@Html.RouteIf("index", "active")">
-                <a href="@Url.Action("index", "home")" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+                <a href="@Url.Action("index", "home")" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">主页</span></a>
             </li>
 
             <li class="@Html.RouteIf("NewTicket", "active")">
@@ -27,15 +27,15 @@
             </li>
 
             <li class="@Html.RouteIf("UnassignedTickets", "active")">
-                <a href="@Url.Action("UnassignedTickets", "ticket")"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">待办任务</span><span class="badge pull-right inbox-badge" id="unassignedTicketSpan"></span></a>
+                <a href="@Url.Action("UnassignedTickets", "ticket")"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">未分配任务</span><span class="badge pull-right inbox-badge" id="unassignedTicketSpan"></span></a>
             </li>
 
             <li class="@Html.RouteIf("AssignedTickets", "active")">
-                <a href="@Url.Action("AssignedTickets", "ticket")"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">已完成任务</span></a>
+                <a href="@Url.Action("AssignedTickets", "ticket")"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">已分配任务</span></a>
             </li>
 
             <li class="@Html.RouteIf("TicketsByStatus", "active")">
-                <a href="@Url.Action("TicketsByStatus", "ticket")"><i class="fa fa-lg fa-fw fa-filter"></i> <span class="menu-item-parent">任务状态</span></a>
+                <a href="@Url.Action("TicketsByStatus", "ticket")"><i class="fa fa-lg fa-fw fa-filter"></i> <span class="menu-item-parent">总任务状态</span></a>
             </li>
             @*<li class="@Html.RouteIf("GetAllTickets", "active")">
                 <a href="@Url.Action("GetAllTickets", "ticket")"><i class="fa fa-lg fa-fw fa-filter"></i> <span class="menu-item-parent">Hot Tickets</span></a>

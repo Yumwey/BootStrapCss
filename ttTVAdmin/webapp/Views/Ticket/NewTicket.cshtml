@@ -1,4 +1,4 @@
-﻿@model ttTVAdmin.Models.TicketCreationModel
+﻿@model Models.TicketCreationModel
 
 <div id="content">
     <div class="row">
@@ -67,7 +67,7 @@
                         <!-- end widget edit box -->
                         <!-- widget content -->
                         <div class="widget-body">
-                            <form action="@Url.Action("newticket", "ticket")" method="POST" id="smart-form-ticket" class="smart-form client-form">
+                            <form action="@Url.Action("create", "ticket")" method="POST" id="smart-form-ticket" class="smart-form client-form">
                                 <header>
                                     Task Details
                                 </header>

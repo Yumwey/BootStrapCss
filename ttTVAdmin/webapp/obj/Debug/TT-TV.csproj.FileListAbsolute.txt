@@ -43,3 +43,9 @@ D:\BootStrapCss\ttTVAdmin\webapp\bin\zh-Hans\System.Net.Http.Formatting.resource
 D:\BootStrapCss\ttTVAdmin\webapp\obj\Debug\SmartAdminMvc.dll
 D:\BootStrapCss\ttTVAdmin\webapp\obj\Debug\SmartAdminMvc.pdb
 D:\BootStrapCss\ttTVAdmin\webapp\obj\Debug\TT-TV.csprojResolveAssemblyReference.cache
+D:\BootStrapCss\ttTVAdmin\webapp\bin\DAL.dll
+D:\BootStrapCss\ttTVAdmin\webapp\bin\IDAL.dll
+D:\BootStrapCss\ttTVAdmin\webapp\bin\Model.dll
+D:\BootStrapCss\ttTVAdmin\webapp\bin\DAL.pdb
+D:\BootStrapCss\ttTVAdmin\webapp\bin\IDAL.pdb
+D:\BootStrapCss\ttTVAdmin\webapp\bin\Model.pdb
