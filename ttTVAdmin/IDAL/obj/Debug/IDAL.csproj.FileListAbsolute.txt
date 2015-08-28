@@ -7,3 +7,10 @@ D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\Model.pdb
 D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\EntityFramework.xml
 D:\BootStrapCss\ttTVAdmin\IDAL\obj\Debug\IDAL.dll
 D:\BootStrapCss\ttTVAdmin\IDAL\obj\Debug\IDAL.pdb
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\IDAL.dll.config
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\BootStrapCss\ttTVAdmin\IDAL\bin\Debug\EntityFramework.SqlServer.xml

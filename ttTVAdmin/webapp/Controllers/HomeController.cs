@@ -1,12 +1,14 @@
 ﻿#region Using
 
+using SmartAdminMvc.Filter;
 using System.Web.Mvc;
 
 #endregion
 
 namespace ttTVAdmin.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [UserAttribute]
     public class HomeController : Controller
     {
         // GET: home/index

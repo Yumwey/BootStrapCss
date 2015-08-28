@@ -50,6 +50,7 @@ namespace ttTVAdmin.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Admin")]
         public async Task<ActionResult> Login(AccountLoginModel viewModel)
         {
             // Ensure we have a valid viewModel to work with

@@ -11,8 +11,8 @@ namespace DAL
     public class DALFactory
     {
         //获取到对应的具体实现方法
-        public static string name = ConfigurationManager.AppSettings["DAL"].ToString();
-        public static string path = ConfigurationManager.AppSettings["Repository"].ToString();
+        public static string name = ConfigurationManager.AppSettings["First"].ToString();
+        public static string path = ConfigurationManager.AppSettings["Second"].ToString();
 
         public static InterfaceTicketsRepository CreateTickets()
         {
@@ -29,5 +29,16 @@ namespace DAL
             string classname = name + ".TicketsAttachment" + path;
             return (InterfaceTicketsAttachmentsRepository)Assembly.Load(name).CreateInstance(classname);
         }
+        public static IUserRepository CreateUser()
+        {
+            string classname = name + ".User" + path;
+            return (IUserRepository)Assembly.Load(name).CreateInstance(classname);
+        }
+        public static IRoleRepository CreateRole()
+        {
+            string classname = name + ".Role" + path;
+            return (IRoleRepository)Assembly.Load(name).CreateInstance(classname);
+        }
+        
     }
 }

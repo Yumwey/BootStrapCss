@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.WebPages.Html;
 using Models;
-using Models;
+//using Models;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
@@ -15,6 +15,8 @@ using SelectListItem = System.Web.Mvc.SelectListItem;
 using IDAL;
 using DAL;
 using Models;
+using SmartAdminMvc.Filter;
+
 
 #endregion
 
@@ -30,6 +32,7 @@ namespace ttTVAdmin.Controllers
         private static InterfaceCommentsRepository IComments = DALFactory.CreateTicketsComments();
         private static InterfaceTicketsAttachmentsRepository IAttchment = DALFactory.CreateAttachment();
         // GET: /account/register
+        [PublishAttribute]
         public ActionResult NewTicket()
         {
             var settings = db.Settings;
@@ -184,25 +187,10 @@ namespace ttTVAdmin.Controllers
         //定义的附件的获取和显示方法:图片
         public ActionResult GetAttachment(int id, int? size)
         {
-            TicketAttachment file = db.TicketAttachments.Find(id);
-            byte[] data = file.FileContents;
-
-            if (size.HasValue)
-            {
-                switch (size)
-                {
-                    case 1:
-                        data = ImageManager.ResizeImageFile(data, ImageManager.PhotoSize.Small);
-                        break;
-                    case 2:
-                        data = ImageManager.ResizeImageFile(data, ImageManager.PhotoSize.Medium);
-                        break;
-                    case 3:
-                        data = ImageManager.ResizeImageFile(data, ImageManager.PhotoSize.Full);
-                        break;
-                }
-            }
-
+            //先获取文件
+            TicketAttachment file = IAttchment.GetAttachment(id, size);
+           //再获取文件流
+            byte[] data = IAttchment.GetAttachmentStream(id, size);
             return File(data, file.FileType, file.FileName);
         }
 
@@ -289,26 +277,8 @@ namespace ttTVAdmin.Controllers
         [HttpPost]
         public string AddComment(long id, string comment)
         {
-            string result = null;
-            Ticket ticket = db.Tickets.Find(id);
-            if (ticket == null)
-                result = "Ticket not found.";
-            else
-            {
-                TicketComment tcomment = new TicketComment();
-                DateTime now = DateTime.Now;
-
-                tcomment.CommentEvent = string.Format("added comment");
-                tcomment.IsHtml = false;
-                tcomment.CommentedBy = User.Identity.Name;
-                tcomment.CommentedDate = now;
-                tcomment.Comment = Server.HtmlEncode(comment).Trim(); //对数据进行编码，防止脚本注入式攻击
-                tcomment.TicketId = ticket.TicketId;
-                db.TicketComments.Add(tcomment);
-                db.SaveChanges();
-            }
-
-            return result;
+            string user = this.User.Identity.Name;
+            return IComments.Add(id, comment, user);
         }
 
         //上传文件

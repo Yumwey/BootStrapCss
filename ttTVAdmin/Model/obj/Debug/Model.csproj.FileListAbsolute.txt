@@ -6,3 +6,8 @@ D:\BootStrapCss\ttTVAdmin\Model\bin\Debug\EntityFramework.xml
 D:\BootStrapCss\ttTVAdmin\Model\bin\Debug\EntityFramework.SqlServer.xml
 D:\BootStrapCss\ttTVAdmin\Model\obj\Debug\Model.dll
 D:\BootStrapCss\ttTVAdmin\Model\obj\Debug\Model.pdb
+D:\BootStrapCss\ttTVAdmin\Model\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\BootStrapCss\ttTVAdmin\Model\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\BootStrapCss\ttTVAdmin\Model\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\BootStrapCss\ttTVAdmin\Model\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\BootStrapCss\ttTVAdmin\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IDAL;
 using Models;
+using System.Web.Mvc;
 
 namespace DAL
 {
@@ -24,5 +25,36 @@ namespace DAL
             var files = db.TicketAttachments.Where(a => a.TicketId == id).OrderByDescending(c => c.FileId);
             return files;
         }
-    }
+        //显示当前附件
+        public TicketAttachment GetAttachment(int id, int? size)
+        {
+            TicketAttachment file = db.TicketAttachments.Find(id);
+            return file;
+        }
+        //获取文件流
+        public byte[] GetAttachmentStream(int id, int? size)
+        {
+            TicketAttachment file = GetAttachment(id, size);
+            byte[] data = file.FileContents;
+
+            if (size.HasValue)
+            {
+                switch (size)
+                {
+                    case 1:
+                        data = ImageManager.ResizeImageFile(data, ImageManager.PhotoSize.Small);
+                        break;
+                    case 2:
+                        data = ImageManager.ResizeImageFile(data, ImageManager.PhotoSize.Medium);
+                        break;
+                    case 3:
+                        data = ImageManager.ResizeImageFile(data, ImageManager.PhotoSize.Full);
+                        break;
+                }
+            }
+            return data;
+        }
+        //上传文件
+        //public 
+    }  
 }

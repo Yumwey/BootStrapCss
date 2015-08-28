@@ -1030,6 +1030,9 @@
     <Content Include="Views\Ticket\Details.cshtml" />
     <Content Include="Views\Ticket\EditorTickets.cshtml" />
     <Content Include="Views\Ticket\Delete.cshtml" />
+    <Content Include="Views\Roles\RoleManager.cshtml" />
+    <Content Include="Views\Users\ManageUsers.cshtml" />
+    <Content Include="Views\Roles\AddRole.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1066,12 +1069,17 @@
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\GraphsController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IconsController.cs" />
     <Compile Include="Controllers\IntelController.cs" />
     <Compile Include="Controllers\MiscController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Filter\AdminAttribute.cs" />
+    <Compile Include="Filter\PublishAttribute.cs" />
+    <Compile Include="Filter\UserAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1095,6 +1103,7 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

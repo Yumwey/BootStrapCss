@@ -1,0 +1,42 @@
+﻿
+<div class="modal fade" id="AddRole" tabindex="-1" role="dialog" aria-labelledby="updateTextFieldModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="updateTextFieldModalLabel">新增角色</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="@Url.Action("NewRoles","Roles")" method="post" name="Name" id="add-role" class="smart-form" novalidate="novalidate">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label>名称：</label>
+                                    <input id="modalTextFieldTextInput" name="Name" style="display:inline" type="text" class="form-control" placeholder="" required />
+                                </div>
+                            </fieldset>
+                            <footer>
+                                <section style="text-align:right">
+                                    <input type="submit" style="height:40px;width:80px" value="确定" class="btn btn-default" id="suretosave" />
+                                    <button type="button" style="height:40px;width:80px" class="btn btn-primary" data-dismiss="modal">
+                                        取消
+                                    </button>
+                                </section>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+                @*<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        取消
+                    </button>
+                    <button type="button" class="btn btn-primary" id="submitChangeTextFieldModal">
+                        确定
+                    </button>
+                </div>*@
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->

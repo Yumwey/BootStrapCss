@@ -21,7 +21,12 @@
             <li class="@Html.RouteIf("index", "active")">
                 <a href="@Url.Action("index", "home")" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">主页</span></a>
             </li>
-
+             <li class="@Html.RouteIf("RoleManager","active")">
+                <a href="@Url.Action("RoleManager","roles")"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">角色管理</span></a>
+             </li>
+            <li class="@Html.RouteIf("ManageUsers", "active")">
+                <a href="@Url.Action("ManageUsers","users")"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">用户管理</span></a>
+            </li>
             <li class="@Html.RouteIf("NewTicket", "active")">
                 <a href="@Url.Action("NewTicket", "ticket")"><i class="fa fa-lg fa-fw fa-plus"></i> <span class="menu-item-parent">新的任务</span><span class="badge pull-right inbox-badge" id="newTicketSpan"></span></a>
             </li>
